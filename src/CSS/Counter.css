@@ -1,0 +1,43 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.bodyContainer{
+    margin: 0px;
+    padding: 0px;
+}
+
+.row{
+    margin: 0px;
+    padding: 0px;
+}
+
+.column{
+    margin: auto;
+    padding: auto;
+}
+
+
+
+.btnFun{
+  background-color: #04AA6D;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+  padding: auto;
+  width: 200px;
+  height: 40px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btnFun:hover{
+    background-color: red;
+    transform: scale(1.1);
+
+}
