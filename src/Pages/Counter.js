@@ -41,7 +41,8 @@ const Counter = () => {
         console.log("Change Click me")
 
 
-        setText(event.target.value.split(/ +/).join(' ').replace(/^\s*\n/gm, ""))
+        setText(event.target.value)
+        // setText(event.target.value.split(/ +/).join(' ').replace(/^\s*\n/gm, ""))
         // setText(event.target.value.split(/ +/).join(' '))
 
     }
@@ -53,14 +54,19 @@ const Counter = () => {
 
 
 
-    const[myStyle, setMyStyle] = useState({
+    const [myStyle, setMyStyle] = useState({
         color: 'black',
         backgroundColor: 'white'
     })
 
-    const[btntext, setBtnText] = useState("Enable Dark mode")
+    const [myButton, setMyButton] = useState({
+        color: 'black',
+        backgroundColor: 'white'
+    })
 
-    const toggleStyle= () => {
+    const [btntext, setBtnText] = useState("Enable Dark mode")
+
+    const toggleStyle = () => {
         if (myStyle.color === "black") {
             setMyStyle({
                 color: "white",
@@ -69,21 +75,40 @@ const Counter = () => {
             })
             setBtnText("Enable Light Mode")
         }
-    
-    else{
-        setMyStyle({
-            color: 'black',
-            backgroundColor: 'white'
-        })
-        setBtnText("Enable Dark Mode")
+
+        else {
+            setMyStyle({
+                color: 'black',
+                backgroundColor: 'white'
+            })
+            setBtnText("Enable Dark Mode")
+        }
+
+
+        if (myButton.color === "black") {
+            setMyButton({
+                color: "white",
+                backgroundColor: "black",
+                border: "1px solid white",
+            })
+            // setBtnText("Enable Light Mode")
+        }
+
+        else {
+            setMyButton({
+                color: 'black',
+                backgroundColor: '#04AA6D'  
+            })
+            // setBtnText("Enable Dark Mode")
+        }
+
+        toast.success(btntext)
     }
-    toast.success(btntext)
-} 
 
     return (
-        <>
+        <div className='FullBody' >
 
-            <div className="bodyContainer" >
+            <div className="bodyContainer" style={myStyle}>
 
                 <ToastContainer
                     position="top-right"
@@ -101,8 +126,6 @@ const Counter = () => {
 
                     <div className=" column col-md-8 offset-md-2 my-5 border" style={myStyle}>
 
-
-
                         <div className="form-group" >
                             {/* <label htmlFor="exampleFormControlTextarea1">Enter Your Text Below</label>` */}
                             <textarea className="form-control my-3"
@@ -114,14 +137,19 @@ const Counter = () => {
                                 style={myStyle}
                             ></textarea>
                         </div>
-                        <div className="btnClass">
-                            <button className='btnFun mx-lg-0  my-1' onClick={handleUpClickUppercase}>Convert to Uppercase</button>
-                            <button className='btnFun mx-lg-2 my-1' onClick={handleUpClickLowercase}>Convert to Lowercase</button>
-                            <button className='btnFun mx-lg-0 my-1' onClick={handleUpClickClearText}>Clear All text</button>
-                            <button className='btnFun mx-lg-0 my-1' onClick={handleUpClickCopyText}>Select All text</button>
-                            <button className='btnFun mx-lg-2 my-1' onClick={toggleStyle}>{btntext}</button>
+                        <div className="btnClass" >
+                            <button className='btnFun mx-lg-0  my-1' style={myButton} onClick={handleUpClickUppercase}>Convert to Uppercase</button>
+                            <button className='btnFun mx-lg-2 my-1' style={myButton} onClick={handleUpClickLowercase}>Convert to Lowercase</button>
+                            <button className='btnFun mx-lg-0 my-1' style={myButton} onClick={handleUpClickClearText}>Clear All text</button>
+                            <button className='btnFun mx-lg-0 my-1' style={myButton} onClick={handleUpClickCopyText}>Select All text</button>
+                            <button className='btnFun mx-lg-2 my-1' style={myButton} onClick={toggleStyle}>{btntext}</button>
                         </div>
-                        <p my-3>Line: {text.split("\n").length}&nbsp;&nbsp;Total Words :&nbsp;{text.split(' ').length - 1 + text.split("\n").length - 1} &nbsp;&nbsp;Total Characters :&nbsp;{text.length + 1 - text.split("\n").length}</p>
+                        {/* <p my-3>Line: {text.split("\n").length}&nbsp;&nbsp;Total Words :&nbsp;{text.split(' ').length - 1 + text.split("\n").length - 1} &nbsp;&nbsp;Total Characters :&nbsp;{text.length + 1 - text.split("\n").length}</p> */}
+                        <p my-3>Line: {text.split("\n").filter((element)=>{return element.length!==0}).length}&nbsp;&nbsp;
+                        Total Words :&nbsp;{text.split(/\s+/).filter((element)=>{return element.length!==0}).length
+                        //  + text.split("\n").filter((element)=>{return element.length!==0}).length
+                    } 
+                        &nbsp;&nbsp;Total Characters :&nbsp;{text.length + 1 - text.split("\n").length}</p>
                         <p>Preview:&nbsp;{text}</p>
 
                     </div>
@@ -132,7 +160,7 @@ const Counter = () => {
 
             </div>
 
-        </>
+        </div>
     )
 }
 

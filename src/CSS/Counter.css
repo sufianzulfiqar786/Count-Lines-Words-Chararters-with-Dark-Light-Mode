@@ -1,11 +1,14 @@
 body{
     margin: 0px;
     padding: 0px;
+    
 }
 
 .bodyContainer{
     margin: 0px;
     padding: 0px;
+    /* height: 597px; */
+    height: 100vh;
 }
 
 .row{
@@ -21,7 +24,7 @@ body{
 
 
 .btnFun{
-  background-color: #04AA6D;
+  /* background-color: #04AA6D; */
   border: none;
   font-size: 16px;
   font-weight: 600;
